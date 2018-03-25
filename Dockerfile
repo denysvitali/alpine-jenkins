@@ -9,7 +9,7 @@ RUN apk add --update shadow \
     && groupadd -g 50 staff \
     && usermod -a -G staff jenkins && usermod -a -G docker jenkins
 RUN apk add python3 rust python py2-pip python3-dev python2-dev python-dev libffi libffi-dev
-RUN apk add build-base python-dev py-pip jpeg-dev zlib-dev cairo
+RUN apk add build-base python-dev py-pip jpeg-dev zlib-dev cairo-dev
 ENV LIBRARY_PATH=/lib:/usr/lib
 RUN apk --no-cache add ca-certificates openssl && \
     wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub && \
