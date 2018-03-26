@@ -1,17 +1,22 @@
 node {
     def customImage;
+
+    environment {
+        REGISTRY_AUTH = credentials("74698836-d9b1-4490-a19a-cfd7af96dab8")
+    }
+
     stage('Checkout') {
         checkout scm
     }
 
     stage('Build Image'){
-        customImage = docker.build("dvitali/jenkins-alpine:${env.BUILD_ID}")
+        sh "docker build . -t dvitali/jenkins-alpine:${env.BUILD_ID}"
+        sh "docker build . -t dvitali/jenkins-alpine:latest"
     }
 
     stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', '74698836-d9b1-4490-a19a-cfd7af96dab8') {
-            customImage.push("${env.BUILD_NUMBER}")
-            customImage.push("latest")
-        }
+        sh "docker login -u=$REGISTRY_AUTH_USR -p=$REGISTRY_AUTH_PSW ${env.REGISTRY_ADDRESS}"
+        sh "docker push dvitali/jenkins-alpine:latest"
+        sh "docker push dvitali/jenkins-alpine:${env.BUILD_ID}"
     }
 }
