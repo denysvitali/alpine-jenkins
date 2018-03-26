@@ -1,15 +1,6 @@
-pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                sh 'docker build -t dvitali/jenkins-alpine:latest .'
-            }
-        }
-        stage('Push to dockerhub') {
-            steps {
-                sh 'docker push dvitali/jenkins-alpine:latest'
-            }
-        }
-    }
+node {
+    checkout scm
+    def customImage = docker.build("dvitali/jenkins-alpine:${env.BUILD_ID}")
+    customImage.push()
+    customImage.push('latest')
 }
