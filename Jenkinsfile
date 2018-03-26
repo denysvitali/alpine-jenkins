@@ -1,10 +1,4 @@
 node {
-    def customImage;
-
-    environment {
-        REGISTRY_AUTH = credentials("docker-hub-dvitali")
-    }
-
     stage('Checkout') {
         checkout scm
     }
@@ -15,6 +9,9 @@ node {
     }
 
     stage('Push image') {
+        environment {
+            REGISTRY_AUTH = credentials("docker-hub-dvitali")
+        }
         sh "docker login -u=$REGISTRY_AUTH_USR -p=$REGISTRY_AUTH_PSW ${env.REGISTRY_ADDRESS}"
         sh "docker push dvitali/jenkins-alpine:latest"
         sh "docker push dvitali/jenkins-alpine:${env.BUILD_ID}"
