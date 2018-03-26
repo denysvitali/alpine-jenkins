@@ -9,8 +9,8 @@ node {
 
     stage('Push image') {
         docker.withRegistry('https://registry.hub.docker.com', '74698836-d9b1-4490-a19a-cfd7af96dab8') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+            customImage.push("${env.BUILD_NUMBER}")
+            customImage.push("latest")
         }
     }
 }
