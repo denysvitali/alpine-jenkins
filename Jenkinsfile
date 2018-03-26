@@ -10,9 +10,7 @@ node {
     }
 
     stage('Push image') {
-         docker.withRegistry('https://index.docker.io/v2/', 'denvit-docker-hub') {
-            customImage.push("build-${env.BUILD_ID}")
-            customImage.push("latest")
-        }
+        customImage.push("build-${env.BUILD_ID}")
+        customImage.push("latest")
     }
 }
