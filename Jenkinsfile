@@ -10,7 +10,7 @@ node {
     }
 
     stage('Push image') {
-         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-dvitali') {
+         docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-dvitali') {
             customImage.push("${env.BUILD_NUMBER}")
             customImage.push("latest")
         }
