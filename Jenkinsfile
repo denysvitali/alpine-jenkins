@@ -1,10 +1,11 @@
 node {
+    def customImage;
     stage('Checkout') {
         checkout scm
     }
 
     stage('Build Image'){
-        def customImage = docker.build("dvitali/jenkins-alpine:${env.BUILD_ID}")
+        customImage = docker.build("dvitali/jenkins-alpine:${env.BUILD_ID}")
     }
 
     stage('Push image') {
