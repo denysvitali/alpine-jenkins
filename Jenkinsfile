@@ -2,7 +2,7 @@ node {
     def customImage;
 
     environment {
-        REGISTRY_AUTH = credentials("74698836-d9b1-4490-a19a-cfd7af96dab8")
+        REGISTRY_AUTH = credentials("docker-hub-dvitali")
     }
 
     stage('Checkout') {
