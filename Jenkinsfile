@@ -6,7 +6,7 @@ node {
     }
 
     stage('Build Image'){
-        customImage = docker.build("dvitali/jenkins-alpine:build-${env.BUILD_ID}")
+        customImage = docker.build("dvitali/jenkins-alpine")
     }
 
     stage('Push image') {
