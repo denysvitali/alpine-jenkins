@@ -4,8 +4,8 @@ node {
     }
 
     stage('Build Image'){
-        def customImage = docker.build("dvitali/jenkins-alpine:latest")
-        docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-dvitali') {
+        def customImage = docker.build("dvitalitest/jenkins-alpine:latest")
+        docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-dvitalitest') {
             customImage.push()
             customImage.push("build-${env.BUILD_ID}")
         }
