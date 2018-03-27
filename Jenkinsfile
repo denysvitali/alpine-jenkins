@@ -5,6 +5,9 @@ node {
 
     stage('Build Image'){
         def customImage = docker.build("dvitali/jenkins-alpine:latest")
+    }
+
+    stage('Push Image') {
         withCredentials([usernamePassword(
             credentialsId: "docker-hub-dvitali",
             usernameVariable: "USER",
