@@ -5,10 +5,14 @@ node {
 
     stage('Build Image'){
         def customImage = docker.build("dvitalitest/jenkins-alpine:latest")
-        docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-dvitalitest') {
-            customImage.push()
-            customImage.push("build-${env.BUILD_ID}")
+        withCredentials([usernamePassword(
+            credentialsId: "docker-hub-dvitalitest",
+            usernameVariable: "USER",
+            passwordVariable: "PASS"
+        )]) {
+            sh "docker login -u $USER -p $PASS"
         }
-        //customImage.push("latest")
+        
+        sh "docker push dvitalitest/jenkins-alpine:latest"
     }
 }
