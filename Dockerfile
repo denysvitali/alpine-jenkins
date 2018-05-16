@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.119-alpine
+FROM jenkins/jenkins:2.122-alpine
 
 USER root
 
@@ -24,7 +24,10 @@ RUN apk add python3\
     zlib-dev\ 
     cairo-dev\ 
     wget\ 
-    ca-certificates
+    ca-certificates\
+    sudo\
+    bsdtar\
+    proot
 
 # Java FX
 RUN cd /tmp && wget --quiet --output-document=/etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
