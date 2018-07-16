@@ -27,13 +27,8 @@ RUN apk add python3\
     ca-certificates\
     git
 
-# Java FX
-RUN cd /tmp && wget --quiet --output-document=/etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
-    wget https://github.com/sgerrand/alpine-pkg-java-openjfx/releases/download/8.151.12-r0/java-openjfx-8.151.12-r0.apk && \
-    apk add --no-cache java-openjfx-8.151.12-r0.apk
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub && \
     apk --no-cache -X http://apkproxy.herokuapp.com/sgerrand/alpine-pkg-glibc add glibc glibc-bin
-ENV LIBRARY_PATH=/lib:/usr/lib
 USER root
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod u+x /usr/local/bin/entrypoint.sh
